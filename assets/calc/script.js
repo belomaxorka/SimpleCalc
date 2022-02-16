@@ -11,16 +11,16 @@ class Calculator {
     /* Метод конструктора */
     constructor() {
         /* Основные функции */
-        this.isEmpty = function isEmpty(value) {
+        this.isEmpty = function isEmpty(value) { /* Проверка на пустоту */
             return (typeof value === 'undefined' || value == null || value.toString().trim().length == 0 || value.toString().trim() == '');
         }
-        this.isNumber = function isNumber(n) {
+        this.isNumber = function isNumber(n) { /* Проверка на Number */
             return Number(n) === n;
         }
-        this.isString = function isString(x) {
+        this.isString = function isString(x) { /* Проверка на String */
             return Object.prototype.toString.call(x) === "[object String]";
         }
-        this.FixedNumber = function FixedNumber(number, fixed) {
+        this.FixedNumber = function FixedNumber(number, fixed) { /* Приводим число в нормальный вид */
             if ((typeof number === 'number' || typeof number === 'string') && !isNaN(number - parseFloat(number))) {
                 number = String(number);
                 let split = number.split('.');
@@ -114,15 +114,15 @@ class Calculator {
 
         /* Выводим результат, но сначала проверяем его */
         if (!this.isEmpty(this.result)) {
-            /* Показываем поле с конечным ответом */
             if (this.isNumber(this.result)) {
+                /* Показываем поле */
                 $('#action_result').parent().slideDown();
                 if ($('#action_result').parent().is(':visible')) {
-                    /* Показываем поле с ответом + приводим число в нормальный вид */
+                    /* Показываем ответом + приводим число в нормальный вид */
                     $('#action_result')
                         .focus()
                         .val(this.FixedNumber(this.result, Infinity));
-                    /* Вывод сообщения об успехе операции + с конечным числом */
+                    /* Вывод сообщения об успехе операции + с конечным числом приведённым в нормальны вид */
                     M.toast({html: 'Успешно! Результат:' + '&nbsp;' + this.FixedNumber(this.result, Infinity) + '.'});
                     /* Всё хорошо, останавливаем код */
                     return true;
@@ -158,7 +158,7 @@ class Calculator {
     copy() {
         /* Проверка */
         if (!this.isEmpty(this.result)) {
-            /* Приводим результат в нормальный вид + копируем его  */
+            /* Приводим результат в нормальный вид + копируем его в буфер обмена */
             navigator.clipboard.writeText(this.FixedNumber(this.result, Infinity))
                 .then(() => {
                     /* Выводим сообщения об успехе */
