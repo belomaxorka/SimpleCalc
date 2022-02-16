@@ -1,0 +1,24 @@
+/**
+ * SimpleCalc
+ *
+ * styles.css
+ * corew
+ */
+
+/* Стилизация полосы прокрутки */
+::selection {background: #121212;color:white;}
+::-moz-selection {background: #121212;color:white;}
+/* Убираем обводку у тэга A */
+a {outline: none;border: none}
+/* Стилизация hr */
+hr {border: 0;height: 0;border-top: 1px solid rgba(0, 0, 0, 0.1);border-bottom: 1px solid rgba(255, 255, 255, 0.3);}
+/* Класс убирает выделение текста */
+.no-select {-webkit-touch-callout: none !important;-webkit-user-select: none !important;-khtml-user-select: none !important;-moz-user-select: none !important;-ms-user-select: none !important;user-select: none !important;}
+/* Нормализует положение элемента относительно другого */
+.inline-icon {vertical-align: bottom;}
+/* Класс задаёт нужному элементу cursor pointer */
+.pointer {cursor: pointer !important;}
+/* UI укращение */
+.gradient {background: linear-gradient(135deg, #12BCB0 20%, #FABE0E 70%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;}
+/* Пресет задаёт размер шрифта равный 18px */
+.fs-18 {font-size: 18px !important;}
