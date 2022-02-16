@@ -12,7 +12,7 @@ class Calculator {
     constructor() {
         /* Основные функции */
         this.isEmpty = function isEmpty(value) {
-            return (typeof value === 'undefined' || value == null || value === 0);
+            return (typeof value === 'undefined' || value == null || value.toString().trim().length == 0 || value.toString().trim() == '');
         }
         this.isNumber = function isNumber(n) {
             return Number(n) === n;
@@ -40,10 +40,10 @@ class Calculator {
 
     /* Основная метод */
     calculate(fnum, operation, lnum) {
-        /* Инициализируем переменные */
-        let num1 = Number(fnum); // Храним и получаем первое число
-        let num2 = Number(lnum); // Храним и получаем второе число
-        let operator = String(operation.trim()); // Храним, получаем и проверяем значение оператора
+        /* Инициализируем переменные + производим очистку входных данных */
+        let num1 = Number(fnum.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").trim().split('').join('')); // Получаем входные данные (первое число)
+        let num2 = Number(lnum.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").trim().split('').join('')); // Получаем входные данные (второе число)
+        let operator = String(operation.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").trim().split('').join('')); // Получаем входные данные (оператор)
 
         /* Работа с ведёнными данными (первое и второе число) */
         if (!this.isEmpty(num1)) {
