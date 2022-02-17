@@ -65,6 +65,7 @@ class Calculator {
         let operator = this.CleanString(String(operation)); // Оператор
 
         /* Работа с ведёнными данными (первое и второе число) */
+        /* Первое число */
         if (!this.isEmpty(num1)) { // Проверка на пустоту
             if (!this.isString(num1)) { // Проверка на string
                 /* Вывод сообщения об ошибке */
@@ -90,6 +91,7 @@ class Calculator {
             $('#action_result').parent().slideUp();
             return false;
         }
+        /* Второе число */
         if (!this.isEmpty(num2)) { // Проверка на пустоту
             if (!this.isString(num2)) { // Проверка на string
                 /* Вывод сообщения об ошибке */
@@ -117,35 +119,43 @@ class Calculator {
         }
 
         /* Смотрим что было в переменной operator и производим расчёты в соответствии с кейсом */
-        if (this.isString(operator) && !this.isEmpty(operator)) { // Проверка на string и на пустоту
-            switch (operator) {
-                /* Сложение */
-                case 'plus_action':
-                    this.result = num1 + num2; // Складываем первое и второе число
-                    break;
-                /* Вычитание */
-                case 'minus_action':
-                    this.result = num1 - num2; // Вычитаем из первого - второе число
-                    break;
-                /* Деление */
-                case 'division_action':
-                    this.result = num1 / num2; // Делим первое число на второе
-                    break;
-                /* Умножение */
-                case 'multiplication_action':
-                    this.result = num1 * num2; // Умножаем первое число на второе
-                    break;
-                /* Если не выбран оператор (или/и если его нету в данной конструкции) */
-                default:
-                case 'default_action':
-                    /* Вывод сообщения об ошибке */
-                    M.toast({html: 'Выберите операцию!'});
-                    /* Останавливаем код + скрываем поле с ответом */
-                    $('#action_result').parent().slideUp();
-                    break;
+        if (!this.isEmpty(operator)) { // Проверка на пустоту
+            if (this.isString(operator)) { // Проверка на строку
+                switch (operator) {
+                    /* Сложение */
+                    case 'plus_action':
+                        this.result = num1 + num2; // Складываем первое и второе число
+                        break;
+                    /* Вычитание */
+                    case 'minus_action':
+                        this.result = num1 - num2; // Вычитаем из первого - второе число
+                        break;
+                    /* Деление */
+                    case 'division_action':
+                        this.result = num1 / num2; // Делим первое число на второе
+                        break;
+                    /* Умножение */
+                    case 'multiplication_action':
+                        this.result = num1 * num2; // Умножаем первое число на второе
+                        break;
+                    /* Если не выбран оператор (или/и если его нету в данной конструкции) */
+                    default:
+                    case 'default_action':
+                        /* Вывод сообщения об ошибке */
+                        M.toast({html: 'Выберите операцию!'});
+                        /* Останавливаем код + скрываем поле с ответом */
+                        $('#action_result').parent().slideUp();
+                        break;
+                }
+                /* Преобразуем конечный результат в string + очищаем + приводим в нормальный вид */
+                this.result = this.CleanString(this.NumberSanitize(String(this.result)));
+            } else {
+                /* Вывод сообщения об ошибке */
+                M.toast({html: 'Что-то пошло не так... (#01 | Not String)'});
+                /* Останавливаем код + скрываем поле с ответом */
+                $('#action_result').parent().slideUp();
+                return false;
             }
-            /* Преобразуем конечный результат в string + очищаем + приводим в нормальный вид */
-            this.result = this.CleanString(this.NumberSanitize(String(this.result)));
         } else {
             /* Вывод сообщения об ошибке */
             M.toast({html: 'Что-то пошло не так... (#03 | Empty)'});
@@ -155,31 +165,39 @@ class Calculator {
         }
 
         /* Выводим результат */
-        if (this.isString(this.result) && !this.isEmpty(this.result)) { // Проверка на string и на пустоту
-            /* Преобразуем конечный результат из string в number (чтобы вывести) */
-            this.result = Number(this.result);
-            if (this.isNumber(this.result)) { // Проверка на number
-                /* Показываем поле */
-                $('#action_result').parent().slideDown();
-                if ($('#action_result').parent().is(':visible')) {
-                    /* Показываем ответ + приводим число в нормальный вид */
-                    $('#action_result')
-                        .focus()
-                        .val(this.FixedNumber(this.result, Infinity));
-                    /* Вывод сообщения об успехе операции + с конечным числом */
-                    M.toast({html: 'Успешно! Результат:' + '&nbsp;' + this.FixedNumber(this.result, Infinity) + '.'});
-                    /* Всё хорошо, останавливаем код */
-                    return true;
+        if (!this.isEmpty(this.result)) { // Проверка на пустоту
+            if (this.isString(this.result)) { // Проверка на string
+                /* Преобразуем конечный результат из string в number (чтобы вывести) */
+                this.result = Number(this.result);
+                if (this.isNumber(this.result)) { // Проверка на number
+                    /* Показываем поле */
+                    $('#action_result').parent().slideDown();
+                    if ($('#action_result').parent().is(':visible')) {
+                        /* Показываем ответ + приводим число в нормальный вид */
+                        $('#action_result')
+                            .focus()
+                            .val(this.FixedNumber(this.result, Infinity));
+                        /* Вывод сообщения об успехе операции + с конечным числом */
+                        M.toast({html: 'Успешно! Результат:' + '&nbsp;' + this.FixedNumber(this.result, Infinity) + '.'});
+                        /* Всё хорошо, останавливаем код */
+                        return true;
+                    } else {
+                        /* Вывод сообщения об ошибке */
+                        M.toast({html: 'Что-то пошло не так... (#04 | DOM Element Not Found)'});
+                        /* Останавливаем код + скрываем поле с ответом */
+                        $('#action_result').parent().slideUp();
+                        return false;
+                    }
                 } else {
                     /* Вывод сообщения об ошибке */
-                    M.toast({html: 'Что-то пошло не так... (#04 | DOM Element not found)'});
+                    M.toast({html: 'Что-то пошло не так... (#02 | Not Number)'});
                     /* Останавливаем код + скрываем поле с ответом */
                     $('#action_result').parent().slideUp();
                     return false;
                 }
             } else {
-                /* Выводим сообщение об ошибке с результатом который получили в качестве исключения */
-                M.toast({html: this.result});
+                /* Вывод сообщения об ошибке */
+                M.toast({html: 'Что-то пошло не так... (#01 | Not String)'});
                 /* Останавливаем код + скрываем поле с ответом */
                 $('#action_result').parent().slideUp();
                 return false;
@@ -210,8 +228,15 @@ class Calculator {
         this.result = this.CleanString(this.NumberSanitize(String(this.result)));
         /* Проверка */
         if (!this.isEmpty(this.result)) { // Проверка на пустоту
-            /* Преобразуем результат из string в number */
-            this.result = Number(this.result);
+            if (!this.isString(this.result)) { // Проверка на string
+                /* Вывод сообщения об ошибке */
+                M.toast({html: 'Что-то пошло не так... (#01 | Not String)'});
+                /* Останавливаем код */
+                return false;
+            } else {
+                /* Преобразуем результат из string в number */
+                this.result = Number(this.result);
+            }
             if (this.isNumber(this.result)) { // Проверка на number
                 /* Приводим результат в нормальный вид + копируем его в буфер обмена */
                 navigator.clipboard.writeText(this.FixedNumber(this.result, Infinity))
