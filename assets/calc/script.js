@@ -34,19 +34,21 @@ class Calculator {
             }
         }
 
-        /* Создаём пустой объект, которому в будущем присвоим значение состоящее из ответа */
-        this.result = null;
+        /* Создаём пустой объект с типом number, которому в будущем присвоим значение состоящее из ответа */
+        Number(this.result = null);
     }
 
     /* Основной метод */
     calculate(fnum, operation, lnum) {
-        /* Инициализируем переменные + производим очистку входных данных */
-        let num1 = Number(fnum.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").trim().split('').join('')); // (первое число)
-        let num2 = Number(lnum.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").trim().split('').join('')); // (второе число)
+        /* Инициализируем переменные + производим очистку входных данных + преобразуем их в строку */
+        let num1 = String(fnum.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").trim().split('').join('')); // (первое число)
+        let num2 = String(lnum.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").trim().split('').join('')); // (второе число)
         let operator = String(operation.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").trim().split('').join('')); // (оператор)
 
         /* Работа с ведёнными данными (первое и второе число) */
         if (!this.isEmpty(num1)) {
+            /* Преобразуем входные данные из string в number (чтобы произвести дальнейшие расчёты) */
+            num1 = Number(num1);
             if (!this.isNumber(num1)) {
                 /* Вывод сообщения об ошибке */
                 M.toast({html: 'Что-то пошло не так...'});
@@ -62,6 +64,8 @@ class Calculator {
             return false;
         }
         if (!this.isEmpty(num2)) {
+            /* Преобразуем входные данные из string в number (чтобы произвести дальнейшие расчёты) */
+            num2 = Number(num2);
             if (!this.isNumber(num2)) {
                 /* Вывод сообщения об ошибке */
                 M.toast({html: 'Что-то пошло не так...'});
@@ -104,6 +108,8 @@ class Calculator {
                     $('#action_result').parent().slideUp();
                     break;
             }
+            /* Преобразуем результат в строку */
+            this.result = String(this.result);
         } else {
             /* Вывод сообщения об ошибке */
             M.toast({html: 'Что-то пошло не так...'});
@@ -114,6 +120,8 @@ class Calculator {
 
         /* Выводим результат, но сначала проверяем его */
         if (!this.isEmpty(this.result)) {
+            /* Преобразуем результат из string в number (чтобы вывести) */
+            this.result = Number(this.result);
             if (this.isNumber(this.result)) {
                 /* Показываем поле */
                 $('#action_result').parent().slideDown();
@@ -140,6 +148,12 @@ class Calculator {
                 $('#action_result').parent().slideUp();
                 return false;
             }
+        } else {
+            /* Вывод сообщения об ошибке */
+            M.toast({html: 'Что-то пошло не так...'});
+            /* Останавливаем код + скрываем поле с ответом */
+            $('#action_result').parent().slideUp();
+            return false;
         }
     }
 
