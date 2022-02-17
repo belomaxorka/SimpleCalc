@@ -145,7 +145,7 @@ class Calculator {
                         M.toast({html: 'Выберите операцию!'});
                         /* Останавливаем код + скрываем поле с ответом */
                         $('#action_result').parent().slideUp();
-                        break;
+                        return false;
                 }
                 /* Преобразуем конечный результат в string + очищаем + приводим в нормальный вид */
                 this.result = this.CleanString(this.NumberSanitize(String(this.result)));
