@@ -11,20 +11,20 @@ class Calculator {
     /* Метод конструктора */
     constructor() {
         /* Основные функции */
-        this.isEmpty = function isEmpty(value) { /* Проверка на пустоту */
+        this.isEmpty = function isEmpty(value) { // Проверка на пустоту
             return (typeof value === 'undefined' || value == null || value.toString().trim().length == 0 || value.toString().trim() == '');
         }
-        this.isNumber = function isNumber(n) { /* Проверка на number */
+        this.isNumber = function isNumber(n) { // Проверка на number
             return Number(n) === n;
         }
-        this.isString = function isString(x) { /* Проверка на string */
+        this.isString = function isString(x) { // Проверка на string
             return Object.prototype.toString.call(x) === "[object String]";
         }
-        this.CleanString = function CleanString(x) { /* Очистка строки */
+        this.CleanString = function CleanString(x) { // Очистка строки
             let cleaning = x;
-            cleaning.split('').join(''); /* Первый этап */
-            cleaning.replace(/[.*+?^${}()|[\]\\]/g, ''); /* Второй этап */
-            cleaning.replace(/[&<"']/g, function (m) { /* Третий этап */
+            cleaning.split('').join(''); // Первый этап
+            cleaning.replace(/[.*+?^${}()|[\]\\]/g, ''); // Второй этап
+            cleaning.replace(/[&<"']/g, function (m) { // Третий этап
                 switch (m) {
                     case '&':
                     case '<':
@@ -33,13 +33,13 @@ class Calculator {
                         return '';
                 }
             });
-            cleaning.trim(); /* Четвертый этап */
-            return cleaning; /* Вывод конечной строки */
+            cleaning.trim(); // Четвертый этап
+            return cleaning; // Вывод конечной строки
         }
-        this.NumberSanitize = function NumberSanitize(n) { /* Преобразование числа в нормальный вид */
+        this.NumberSanitize = function NumberSanitize(n) { // Преобразование числа в нормальный вид
             return n;
         }
-        this.FixedNumber = function FixedNumber(number, fixed) { /* Приводим число в нормальный вид */
+        this.FixedNumber = function FixedNumber(number, fixed) { // Приводим число в нормальный вид
             if ((typeof number === 'number' || typeof number === 'string') && !isNaN(number - parseFloat(number))) {
                 number = String(number);
                 let split = number.split('.');
@@ -60,16 +60,15 @@ class Calculator {
     /* Основной метод */
     calculate(fnum, operation, lnum) {
         /* Инициализируем переменные + производим очистку входных данных + преобразуем их в string + приводим число в нормальный вид */
-        let num1 = this.CleanString(this.NumberSanitize(String(fnum))); /* Первое число */
-        let num2 = this.CleanString(this.NumberSanitize(String(lnum))); /* Второе число */
-        let operator = this.CleanString(String(operation)); /* Оператор */
+        let num1 = this.CleanString(this.NumberSanitize(String(fnum))); // Первое число
+        let num2 = this.CleanString(this.NumberSanitize(String(lnum))); // Второе число
+        let operator = this.CleanString(String(operation)); // Оператор
 
         /* Работа с ведёнными данными (первое и второе число) */
-        if (!this.isEmpty(num1)) {
-            /* Проверка на string */
-            if (!this.isString(num1)) {
+        if (!this.isEmpty(num1)) { // Проверка на пустоту
+            if (!this.isString(num1)) { // Проверка на string
                 /* Вывод сообщения об ошибке */
-                M.toast({html: 'Что-то пошло не так...'});
+                M.toast({html: 'Что-то пошло не так... (#01 | Not String)'});
                 /* Останавливаем код + скрываем поле с ответом */
                 $('#action_result').parent().slideUp();
                 return false;
@@ -77,10 +76,9 @@ class Calculator {
                 /* Преобразуем данные из string в number (чтобы произвести дальнейшие расчёты) */
                 num1 = Number(num1);
             }
-            /* Проверка на number */
-            if (!this.isNumber(num1)) {
+            if (!this.isNumber(num1)) { // Проверка на number
                 /* Вывод сообщения об ошибке */
-                M.toast({html: 'Что-то пошло не так...'});
+                M.toast({html: 'Что-то пошло не так... (#02 | Not Number)'});
                 /* Останавливаем код + скрываем поле с ответом */
                 $('#action_result').parent().slideUp();
                 return false;
@@ -92,11 +90,10 @@ class Calculator {
             $('#action_result').parent().slideUp();
             return false;
         }
-        if (!this.isEmpty(num2)) {
-            /* Проверка на string */
-            if (!this.isString(num2)) {
+        if (!this.isEmpty(num2)) { // Проверка на пустоту
+            if (!this.isString(num2)) { // Проверка на string
                 /* Вывод сообщения об ошибке */
-                M.toast({html: 'Что-то пошло не так...'});
+                M.toast({html: 'Что-то пошло не так... (#01 | Not String)'});
                 /* Останавливаем код + скрываем поле с ответом */
                 $('#action_result').parent().slideUp();
                 return false;
@@ -104,9 +101,9 @@ class Calculator {
                 /* Преобразуем данные из string в number (чтобы произвести дальнейшие расчёты) */
                 num2 = Number(num2);
             }
-            if (!this.isNumber(num2)) {
+            if (!this.isNumber(num2)) { // Проверка на number
                 /* Вывод сообщения об ошибке */
-                M.toast({html: 'Что-то пошло не так...'});
+                M.toast({html: 'Что-то пошло не так... (#02 | Not Number)'});
                 /* Останавливаем код + скрываем поле с ответом */
                 $('#action_result').parent().slideUp();
                 return false;
@@ -120,29 +117,30 @@ class Calculator {
         }
 
         /* Смотрим что было в переменной operator и производим расчёты в соответствии с кейсом */
-        if (this.isString(operator) && !this.isEmpty(operator)) {
+        if (this.isString(operator) && !this.isEmpty(operator)) { // Проверка на string и на пустоту
             switch (operator) {
                 /* Сложение */
                 case 'plus_action':
-                    this.result = num1 + num2;
+                    this.result = num1 + num2; // Складываем первое и второе число
                     break;
                 /* Вычитание */
                 case 'minus_action':
-                    this.result = num1 - num2;
+                    this.result = num1 - num2; // Вычитаем из первого - второе число
                     break;
                 /* Деление */
                 case 'division_action':
-                    this.result = num1 / num2;
+                    this.result = num1 / num2; // Делим первое число на второе
                     break;
                 /* Умножение */
                 case 'multiplication_action':
-                    this.result = num1 * num2;
+                    this.result = num1 * num2; // Умножаем первое число на второе
                     break;
                 /* Если не выбран оператор (или/и если его нету в данной конструкции) */
                 default:
                 case 'default_action':
-                    /* Вывод сообщения об ошибке + останавливаем код + скрываем поле с ответом */
+                    /* Вывод сообщения об ошибке */
                     M.toast({html: 'Выберите операцию!'});
+                    /* Останавливаем код + скрываем поле с ответом */
                     $('#action_result').parent().slideUp();
                     break;
             }
@@ -150,17 +148,17 @@ class Calculator {
             this.result = this.CleanString(this.NumberSanitize(String(this.result)));
         } else {
             /* Вывод сообщения об ошибке */
-            M.toast({html: 'Что-то пошло не так...'});
+            M.toast({html: 'Что-то пошло не так... (#03 | Empty)'});
             /* Останавливаем код + скрываем поле с ответом */
             $('#action_result').parent().slideUp();
             return false;
         }
 
-        /* Выводим результат, но сначала проверяем его */
-        if (this.isString(this.result) && !this.isEmpty(this.result)) {
+        /* Выводим результат */
+        if (this.isString(this.result) && !this.isEmpty(this.result)) { // Проверка на string и на пустоту
             /* Преобразуем конечный результат из string в number (чтобы вывести) */
             this.result = Number(this.result);
-            if (this.isNumber(this.result)) {
+            if (this.isNumber(this.result)) { // Проверка на number
                 /* Показываем поле */
                 $('#action_result').parent().slideDown();
                 if ($('#action_result').parent().is(':visible')) {
@@ -174,7 +172,7 @@ class Calculator {
                     return true;
                 } else {
                     /* Вывод сообщения об ошибке */
-                    M.toast({html: 'Что-то пошло не так...'});
+                    M.toast({html: 'Что-то пошло не так... (#04 | DOM Element not found)'});
                     /* Останавливаем код + скрываем поле с ответом */
                     $('#action_result').parent().slideUp();
                     return false;
@@ -188,7 +186,7 @@ class Calculator {
             }
         } else {
             /* Вывод сообщения об ошибке */
-            M.toast({html: 'Что-то пошло не так...'});
+            M.toast({html: 'Что-то пошло не так... (#03 | Empty)'});
             /* Останавливаем код + скрываем поле с ответом */
             $('#action_result').parent().slideUp();
             return false;
@@ -211,10 +209,10 @@ class Calculator {
         /* Преобразуем конечный результат в string + очищаем + приводим в нормальный вид */
         this.result = this.CleanString(this.NumberSanitize(String(this.result)));
         /* Проверка */
-        if (!this.isEmpty(this.result)) {
+        if (!this.isEmpty(this.result)) { // Проверка на пустоту
             /* Преобразуем результат из string в number */
             this.result = Number(this.result);
-            if (this.isNumber(this.result)) {
+            if (this.isNumber(this.result)) { // Проверка на number
                 /* Приводим результат в нормальный вид + копируем его в буфер обмена */
                 navigator.clipboard.writeText(this.FixedNumber(this.result, Infinity))
                     .then(() => {
@@ -225,19 +223,19 @@ class Calculator {
                     })
                     .catch(() => {
                         /* Вывод сообщения об ошибке */
-                        M.toast({html: 'Что-то пошло не так...'});
+                        M.toast({html: 'Что-то пошло не так... (#05 | Copy Error)'});
                         /* Останавливаем код */
                         return false;
                     });
             } else {
                 /* Вывод сообщения об ошибке */
-                M.toast({html: 'Что-то пошло не так...'});
+                M.toast({html: 'Что-то пошло не так... (#02 | Not Number)'});
                 /* Останавливаем код */
                 return false;
             }
         } else {
             /* Вывод сообщения об ошибке */
-            M.toast({html: 'Что-то пошло не так...'});
+            M.toast({html: 'Что-то пошло не так... (#03 | Empty)'});
             /* Останавливаем код */
             return false;
         }
