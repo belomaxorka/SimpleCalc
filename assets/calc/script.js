@@ -59,15 +59,25 @@ class Calculator {
 
     /* Основной метод */
     calculate(fnum, operation, lnum) {
-        /* Инициализируем переменные + производим очистку входных данных + преобразуем их в string */
-        let num1 = this.CleanString(String(fnum)); // (Первое число)
-        let num2 = this.CleanString(String(lnum)); // (Второе число)
-        let operator = this.CleanString(String(operation)); // (Оператор)
+        /* Инициализируем переменные + производим очистку входных данных + преобразуем их в string + приводим число в нормальный вид */
+        let num1 = this.CleanString(this.NumberSanitize(String(fnum))); /* Первое число */
+        let num2 = this.CleanString(this.NumberSanitize(String(lnum))); /* Второе число */
+        let operator = this.CleanString(String(operation)); /* Оператор */
 
         /* Работа с ведёнными данными (первое и второе число) */
         if (!this.isEmpty(num1)) {
-            /* Преобразуем входные данные из string в number + производим очистку (чтобы произвести дальнейшие расчёты) */
-            num1 = this.NumberSanitize(Number(num1));
+            /* Проверка на string */
+            if (!this.isString(num1)) {
+                /* Вывод сообщения об ошибке */
+                M.toast({html: 'Что-то пошло не так...'});
+                /* Останавливаем код + скрываем поле с ответом */
+                $('#action_result').parent().slideUp();
+                return false;
+            } else {
+                /* Преобразуем данные из string в number (чтобы произвести дальнейшие расчёты) */
+                num1 = Number(num1);
+            }
+            /* Проверка на number */
             if (!this.isNumber(num1)) {
                 /* Вывод сообщения об ошибке */
                 M.toast({html: 'Что-то пошло не так...'});
@@ -83,8 +93,17 @@ class Calculator {
             return false;
         }
         if (!this.isEmpty(num2)) {
-            /* Преобразуем входные данные из string в number + производим очистку (чтобы произвести дальнейшие расчёты) */
-            num2 = this.NumberSanitize(Number(num2));
+            /* Проверка на string */
+            if (!this.isString(num2)) {
+                /* Вывод сообщения об ошибке */
+                M.toast({html: 'Что-то пошло не так...'});
+                /* Останавливаем код + скрываем поле с ответом */
+                $('#action_result').parent().slideUp();
+                return false;
+            } else {
+                /* Преобразуем данные из string в number (чтобы произвести дальнейшие расчёты) */
+                num2 = Number(num2);
+            }
             if (!this.isNumber(num2)) {
                 /* Вывод сообщения об ошибке */
                 M.toast({html: 'Что-то пошло не так...'});
@@ -100,7 +119,7 @@ class Calculator {
             return false;
         }
 
-        /* Смотрим что было в переменной operator и производим расчёты */
+        /* Смотрим что было в переменной operator и производим расчёты в соответствии с кейсом */
         if (this.isString(operator) && !this.isEmpty(operator)) {
             switch (operator) {
                 /* Сложение */
@@ -127,8 +146,8 @@ class Calculator {
                     $('#action_result').parent().slideUp();
                     break;
             }
-            /* Преобразуем конечный результат в string + очищаем */
-            this.result = this.CleanString(String(this.result));
+            /* Преобразуем конечный результат в string + очищаем + приводим в нормальный вид */
+            this.result = this.CleanString(this.NumberSanitize(String(this.result)));
         } else {
             /* Вывод сообщения об ошибке */
             M.toast({html: 'Что-то пошло не так...'});
@@ -138,18 +157,18 @@ class Calculator {
         }
 
         /* Выводим результат, но сначала проверяем его */
-        if (!this.isEmpty(this.result)) {
-            /* Преобразуем результат из string в number + приводим в нормальный вид (чтобы вывести) */
-            this.result = this.NumberSanitize(Number(this.result));
+        if (this.isString(this.result) && !this.isEmpty(this.result)) {
+            /* Преобразуем конечный результат из string в number (чтобы вывести) */
+            this.result = Number(this.result);
             if (this.isNumber(this.result)) {
                 /* Показываем поле */
                 $('#action_result').parent().slideDown();
                 if ($('#action_result').parent().is(':visible')) {
-                    /* Показываем ответом + приводим число в нормальный вид */
+                    /* Показываем ответ + приводим число в нормальный вид */
                     $('#action_result')
                         .focus()
                         .val(this.FixedNumber(this.result, Infinity));
-                    /* Вывод сообщения об успехе операции + с конечным числом приведённым в нормальны вид */
+                    /* Вывод сообщения об успехе операции + с конечным числом */
                     M.toast({html: 'Успешно! Результат:' + '&nbsp;' + this.FixedNumber(this.result, Infinity) + '.'});
                     /* Всё хорошо, останавливаем код */
                     return true;
@@ -187,28 +206,35 @@ class Calculator {
         return true;
     }
 
-    /* Метод для копирования значения из поля с ответом */
+    /* Метод для копирования конечного ответа */
     copy() {
-        /* Преобразуем результат в string + очищаем */
-        this.result = this.CleanString(String(this.result));
+        /* Преобразуем конечный результат в string + очищаем + приводим в нормальный вид */
+        this.result = this.CleanString(this.NumberSanitize(String(this.result)));
         /* Проверка */
         if (!this.isEmpty(this.result)) {
-            /* Преобразуем результат в number + приводим в нормальынй вид */
-            this.result = this.NumberSanitize(Number(this.result));
-            /* Приводим результат в нормальный вид + копируем его в буфер обмена */
-            navigator.clipboard.writeText(this.FixedNumber(this.result, Infinity))
-                .then(() => {
-                    /* Выводим сообщение об успехе */
-                    M.toast({html: 'Вы успешно скопировали результат!'});
-                    /* Всё хорошо, останавливаем код */
-                    return true;
-                })
-                .catch(() => {
-                    /* Вывод сообщения об ошибке */
-                    M.toast({html: 'Что-то пошло не так...'});
-                    /* Останавливаем код */
-                    return false;
-                });
+            /* Преобразуем результат из string в number */
+            this.result = Number(this.result);
+            if (this.isNumber(this.result)) {
+                /* Приводим результат в нормальный вид + копируем его в буфер обмена */
+                navigator.clipboard.writeText(this.FixedNumber(this.result, Infinity))
+                    .then(() => {
+                        /* Выводим сообщение об успехе */
+                        M.toast({html: 'Вы успешно скопировали результат!'});
+                        /* Всё хорошо, останавливаем код */
+                        return true;
+                    })
+                    .catch(() => {
+                        /* Вывод сообщения об ошибке */
+                        M.toast({html: 'Что-то пошло не так...'});
+                        /* Останавливаем код */
+                        return false;
+                    });
+            } else {
+                /* Вывод сообщения об ошибке */
+                M.toast({html: 'Что-то пошло не так...'});
+                /* Останавливаем код */
+                return false;
+            }
         } else {
             /* Вывод сообщения об ошибке */
             M.toast({html: 'Что-то пошло не так...'});
