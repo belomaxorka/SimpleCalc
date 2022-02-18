@@ -15,7 +15,11 @@ class Calculator {
             return (typeof value === 'undefined' || value == null || value.toString().trim().length == 0 || value.toString().trim() == '');
         }
         this.isNumber = function isNumber(n) { // Проверка на number
-            return Number(n) === n;
+            if(Number.isFinite(n) || Number.isNaN(n)) {
+                return Number(n) === n;
+            } else {
+                return false;
+            }
         }
         this.isString = function isString(x) { // Проверка на string
             return Object.prototype.toString.call(x) === "[object String]";
