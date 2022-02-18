@@ -15,7 +15,7 @@ class Calculator {
             return (typeof value === 'undefined' || value == null || value.toString().trim().length == 0 || value.toString().trim() == '');
         }
         this.isNumber = function isNumber(n) { // Проверка на number
-            if(Number.isFinite(n) || Number.isNaN(n)) {
+            if (Number.isFinite(n) || Number.isNaN(n)) {
                 return Number(n) === n;
             } else {
                 return false;
@@ -158,11 +158,11 @@ class Calculator {
         /* Выводим результат */
         if (!this.isEmpty(this.result)) { // Проверка на пустоту
             if (this.isString(this.result)) { // Проверка на string
-                /* Преобразуем конечный результат из string в number (чтобы вывести) */
+                /* Преобразуем конечный результат из string в number */
                 this.result = Number(this.result);
                 if (this.isNumber(this.result)) { // Проверка на number
-                    /* Преобразуем конечный результат в string + очищаем + приводим в нормальный вид */
-                    this.result = this.CleanString(this.NumberSanitize(String(this.result)));
+                    /* Преобразуем конечный результат из number в string */
+                    this.result = String(this.result);
                     /* Показываем поле */
                     $('#action_result').parent().slideDown();
                     if ($('#action_result').parent().is(':visible')) {
@@ -229,8 +229,8 @@ class Calculator {
                 this.result = Number(this.result);
             }
             if (this.isNumber(this.result)) { // Проверка на number
-                /* Преобразуем конечный результат в string + очищаем + приводим в нормальный вид */
-                this.result = this.CleanString(this.NumberSanitize(String(this.result)));
+                /* Преобразуем результат из number в string */
+                this.result = String(this.result);
                 /* Копируем результат в буфер обмена */
                 navigator.clipboard.writeText(this.result)
                     .then(() => {
