@@ -43,19 +43,6 @@ class Calculator {
         this.NumberSanitize = function NumberSanitize(n) { // Преобразование числа в нормальный вид
             return n;
         }
-        this.FixedNumber = function FixedNumber(number, fixed) { // Приводим число в нормальный вид
-            if ((typeof number === 'number' || typeof number === 'string') && !isNaN(number - parseFloat(number))) {
-                number = String(number);
-                let split = number.split('.');
-                if (split.length > 1) {
-                    let left = split[0];
-                    let right = split[1].substr(0, (!fixed ? 4 : fixed));
-                    return Number(left + (fixed !== 0 ? '.' + right : ''));
-                } else {
-                    return Number(number);
-                }
-            }
-        }
 
         /* Создаём пустой объект с типом number, которому в будущем присвоим значение состоящее из ответа */
         Number(this.result = null);
@@ -174,15 +161,17 @@ class Calculator {
                 /* Преобразуем конечный результат из string в number (чтобы вывести) */
                 this.result = Number(this.result);
                 if (this.isNumber(this.result)) { // Проверка на number
+                    /* Преобразуем конечный результат в string + очищаем + приводим в нормальный вид */
+                    this.result = this.CleanString(this.NumberSanitize(String(this.result)));
                     /* Показываем поле */
                     $('#action_result').parent().slideDown();
                     if ($('#action_result').parent().is(':visible')) {
-                        /* Показываем ответ + приводим число в нормальный вид */
+                        /* Показываем ответ */
                         $('#action_result')
                             .focus()
-                            .val(this.FixedNumber(this.result, Infinity));
+                            .val(this.result);
                         /* Вывод сообщения об успехе операции + с конечным числом */
-                        M.toast({text: 'Успешно! Результат: ' + this.FixedNumber(this.result, Infinity) + '.'});
+                        M.toast({text: 'Успешно! Результат: ' + this.result + '.'});
                         /* Всё хорошо, останавливаем код */
                         return true;
                     } else {
@@ -228,8 +217,6 @@ class Calculator {
 
     /* Метод для копирования конечного ответа */
     copy() {
-        /* Преобразуем конечный результат в string + очищаем + приводим в нормальный вид */
-        this.result = this.CleanString(this.NumberSanitize(String(this.result)));
         /* Проверка */
         if (!this.isEmpty(this.result)) { // Проверка на пустоту
             if (!this.isString(this.result)) { // Проверка на string
@@ -242,11 +229,13 @@ class Calculator {
                 this.result = Number(this.result);
             }
             if (this.isNumber(this.result)) { // Проверка на number
-                /* Приводим результат в нормальный вид + копируем его в буфер обмена */
-                navigator.clipboard.writeText(this.FixedNumber(this.result, Infinity))
+                /* Преобразуем конечный результат в string + очищаем + приводим в нормальный вид */
+                this.result = this.CleanString(this.NumberSanitize(String(this.result)));
+                /* Копируем результат в буфер обмена */
+                navigator.clipboard.writeText(this.result)
                     .then(() => {
-                        /* Выводим сообщение об успехе */
-                        M.toast({text: 'Вы успешно скопировали результат!'});
+                        /* Вывод сообщения об успехе операции + с конечным числом */
+                        M.toast({text: 'Вы успешно скопировали результат! ' + '(' + this.result + ')'});
                         /* Всё хорошо, останавливаем код */
                         return true;
                     })
