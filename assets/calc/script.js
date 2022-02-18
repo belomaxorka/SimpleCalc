@@ -182,7 +182,7 @@ class Calculator {
                             .focus()
                             .val(this.FixedNumber(this.result, Infinity));
                         /* Вывод сообщения об успехе операции + с конечным числом */
-                        M.toast({text: 'Успешно! Результат:' + '&nbsp;' + this.FixedNumber(this.result, Infinity) + '.'});
+                        M.toast({text: 'Успешно! Результат: ' + this.FixedNumber(this.result, Infinity) + '.'});
                         /* Всё хорошо, останавливаем код */
                         return true;
                     } else {
