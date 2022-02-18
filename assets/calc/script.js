@@ -73,7 +73,7 @@ class Calculator {
         if (!this.isEmpty(num1)) { // Проверка на пустоту
             if (!this.isString(num1)) { // Проверка на string
                 /* Вывод сообщения об ошибке */
-                M.toast({html: 'Что-то пошло не так... (#01 | Not String)'});
+                M.toast({text: 'Что-то пошло не так... (#01 | Not String)'});
                 /* Останавливаем код + скрываем поле с ответом */
                 $('#action_result').parent().slideUp();
                 return false;
@@ -83,14 +83,14 @@ class Calculator {
             }
             if (!this.isNumber(num1)) { // Проверка на number
                 /* Вывод сообщения об ошибке */
-                M.toast({html: 'Что-то пошло не так... (#02 | Not Number)'});
+                M.toast({text: 'Что-то пошло не так... (#02 | Not Number)'});
                 /* Останавливаем код + скрываем поле с ответом */
                 $('#action_result').parent().slideUp();
                 return false;
             }
         } else {
             /* Вывод сообщения об ошибке */
-            M.toast({html: 'Введите первое число!'});
+            M.toast({text: 'Введите первое число!'});
             /* Останавливаем код + скрываем поле с ответом */
             $('#action_result').parent().slideUp();
             return false;
@@ -99,7 +99,7 @@ class Calculator {
         if (!this.isEmpty(num2)) { // Проверка на пустоту
             if (!this.isString(num2)) { // Проверка на string
                 /* Вывод сообщения об ошибке */
-                M.toast({html: 'Что-то пошло не так... (#01 | Not String)'});
+                M.toast({text: 'Что-то пошло не так... (#01 | Not String)'});
                 /* Останавливаем код + скрываем поле с ответом */
                 $('#action_result').parent().slideUp();
                 return false;
@@ -109,14 +109,14 @@ class Calculator {
             }
             if (!this.isNumber(num2)) { // Проверка на number
                 /* Вывод сообщения об ошибке */
-                M.toast({html: 'Что-то пошло не так... (#02 | Not Number)'});
+                M.toast({text: 'Что-то пошло не так... (#02 | Not Number)'});
                 /* Останавливаем код + скрываем поле с ответом */
                 $('#action_result').parent().slideUp();
                 return false;
             }
         } else {
             /* Вывод сообщения об ошибке */
-            M.toast({html: 'Введите второе число!'});
+            M.toast({text: 'Введите второе число!'});
             /* Останавливаем код + скрываем поле с ответом */
             $('#action_result').parent().slideUp();
             return false;
@@ -146,7 +146,7 @@ class Calculator {
                     default:
                     case 'default_action':
                         /* Вывод сообщения об ошибке */
-                        M.toast({html: 'Выберите операцию!'});
+                        M.toast({text: 'Выберите операцию!'});
                         /* Останавливаем код + скрываем поле с ответом */
                         $('#action_result').parent().slideUp();
                         return false;
@@ -155,14 +155,14 @@ class Calculator {
                 this.result = this.CleanString(this.NumberSanitize(String(this.result)));
             } else {
                 /* Вывод сообщения об ошибке */
-                M.toast({html: 'Что-то пошло не так... (#01 | Not String)'});
+                M.toast({text: 'Что-то пошло не так... (#01 | Not String)'});
                 /* Останавливаем код + скрываем поле с ответом */
                 $('#action_result').parent().slideUp();
                 return false;
             }
         } else {
             /* Вывод сообщения об ошибке */
-            M.toast({html: 'Что-то пошло не так... (#03 | Empty)'});
+            M.toast({text: 'Что-то пошло не так... (#03 | Empty)'});
             /* Останавливаем код + скрываем поле с ответом */
             $('#action_result').parent().slideUp();
             return false;
@@ -182,33 +182,33 @@ class Calculator {
                             .focus()
                             .val(this.FixedNumber(this.result, Infinity));
                         /* Вывод сообщения об успехе операции + с конечным числом */
-                        M.toast({html: 'Успешно! Результат:' + '&nbsp;' + this.FixedNumber(this.result, Infinity) + '.'});
+                        M.toast({text: 'Успешно! Результат:' + '&nbsp;' + this.FixedNumber(this.result, Infinity) + '.'});
                         /* Всё хорошо, останавливаем код */
                         return true;
                     } else {
                         /* Вывод сообщения об ошибке */
-                        M.toast({html: 'Что-то пошло не так... (#04 | DOM Element Not Found)'});
+                        M.toast({text: 'Что-то пошло не так... (#04 | DOM Element Not Found)'});
                         /* Останавливаем код + скрываем поле с ответом */
                         $('#action_result').parent().slideUp();
                         return false;
                     }
                 } else {
                     /* Вывод сообщения об ошибке */
-                    M.toast({html: 'Что-то пошло не так... (#02 | Not Number)'});
+                    M.toast({text: 'Что-то пошло не так... (#02 | Not Number)'});
                     /* Останавливаем код + скрываем поле с ответом */
                     $('#action_result').parent().slideUp();
                     return false;
                 }
             } else {
                 /* Вывод сообщения об ошибке */
-                M.toast({html: 'Что-то пошло не так... (#01 | Not String)'});
+                M.toast({text: 'Что-то пошло не так... (#01 | Not String)'});
                 /* Останавливаем код + скрываем поле с ответом */
                 $('#action_result').parent().slideUp();
                 return false;
             }
         } else {
             /* Вывод сообщения об ошибке */
-            M.toast({html: 'Что-то пошло не так... (#03 | Empty)'});
+            M.toast({text: 'Что-то пошло не так... (#03 | Empty)'});
             /* Останавливаем код + скрываем поле с ответом */
             $('#action_result').parent().slideUp();
             return false;
@@ -220,7 +220,7 @@ class Calculator {
         /* Очищаем форму методом reset */
         $('form')[0].reset();
         /* Выводим сообщение об успехе */
-        M.toast({html: 'Вы успешно очистили все поля!'});
+        M.toast({text: 'Вы успешно очистили все поля!'});
         /* Всё хорошо, останавливаем код + скрываем поле с ответом */
         $('#action_result').parent().slideUp();
         return true;
@@ -234,7 +234,7 @@ class Calculator {
         if (!this.isEmpty(this.result)) { // Проверка на пустоту
             if (!this.isString(this.result)) { // Проверка на string
                 /* Вывод сообщения об ошибке */
-                M.toast({html: 'Что-то пошло не так... (#01 | Not String)'});
+                M.toast({text: 'Что-то пошло не так... (#01 | Not String)'});
                 /* Останавливаем код */
                 return false;
             } else {
@@ -246,25 +246,25 @@ class Calculator {
                 navigator.clipboard.writeText(this.FixedNumber(this.result, Infinity))
                     .then(() => {
                         /* Выводим сообщение об успехе */
-                        M.toast({html: 'Вы успешно скопировали результат!'});
+                        M.toast({text: 'Вы успешно скопировали результат!'});
                         /* Всё хорошо, останавливаем код */
                         return true;
                     })
                     .catch(() => {
                         /* Вывод сообщения об ошибке */
-                        M.toast({html: 'Что-то пошло не так... (#05 | Copy Error)'});
+                        M.toast({text: 'Что-то пошло не так... (#05 | Copy Error)'});
                         /* Останавливаем код */
                         return false;
                     });
             } else {
                 /* Вывод сообщения об ошибке */
-                M.toast({html: 'Что-то пошло не так... (#02 | Not Number)'});
+                M.toast({text: 'Что-то пошло не так... (#02 | Not Number)'});
                 /* Останавливаем код */
                 return false;
             }
         } else {
             /* Вывод сообщения об ошибке */
-            M.toast({html: 'Что-то пошло не так... (#03 | Empty)'});
+            M.toast({text: 'Что-то пошло не так... (#03 | Empty)'});
             /* Останавливаем код */
             return false;
         }
