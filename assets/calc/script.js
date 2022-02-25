@@ -41,7 +41,7 @@ class Calculator {
             return cleaning; // Вывод конечной строки
         }
         this.NumberSanitize = function NumberSanitize(n) { // Преобразование числа в нормальный вид
-            return n;
+            return n; /* TODO */
         }
 
         /* Создаём пустой объект с типом number, которому в будущем присвоим значение состоящее из ответа */
@@ -111,7 +111,7 @@ class Calculator {
 
         /* Смотрим что было в переменной operator и производим расчёты в соответствии с кейсом */
         if (!this.isEmpty(operator)) { // Проверка на пустоту
-            if (this.isString(operator)) { // Проверка на строку
+            if (this.isString(operator)) { // Проверка на string
                 switch (operator) {
                     /* Сложение */
                     case 'plus_action':
