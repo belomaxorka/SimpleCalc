@@ -16,13 +16,13 @@
         <meta name="keywords" content="calc, калькулятор, каль, simple, простой калькулятор, симпле, симпл калк, simple calc, calc simple, calculator simple, simple calculator, симпле калькулятор, калькулятор простой, калк простой, простой калк, симпле калк, simplecalc, calcsimple, SCalc, SC">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <meta name="application-name" content="SimpleCalc | corew">
-        <meta name="version" content="1.8">
+        <meta name="version" content="1.9">
         <meta name="author" content="corew">
         <meta name="designer" content="corew">
         <meta name="copyright" content="corew">
         <meta name="owner" content="corew">
         <meta name="generator" content="self">
-        <!-- Favicon -->
+        <!-- Логотип -->
         <link rel="icon" type="image/x-icon" href="assets/calc/logo.png">
         <!-- Подключаем jQuery + Migrate -->
         <script type="text/javascript" src="assets/jquery/jquery-3.6.0.min.js"></script>
@@ -40,14 +40,14 @@
             <div class="row">
                 <!-- Форма -->
                 <form class="col s12">
-                    <a tabindex="-1" href="/"><h5 class="center gradient">SimpleCalc</h5></a>
+                    <a tabindex="-1" href="#"><h5 class="center gradient">SimpleCalc</h5></a>
                     <blockquote><i class="material-icons left no-select">arrow_downward</i>Ниже описана последовательность действий.
                         <ul>
                             <li>1. В поле "<b>Введите первое число</b>" введите первое желанное число.</li>
                             <li>2. В поле "<b>Выберите операцию</b>" выберите операцию которую хотите выполнить с числом.</li>
                             <li>3. В поле "<b>Введите второе число</b>" введите второе желанное число.</li>
                             <li>4. Нажмите на кнопку "<b>Посчитать</b>".</li>
-                            <li>5. <b>Enjoy!</b></li>
+                            <li>5. <b>Enjoy</b> &#129321;.</li>
                         </ul>
                         <hr>
                         <p class="center">Калькулятор умеет работать с <b>отрицательными</b>, <b>положительными</b>, <b>целыми</b> и <b>не целыми</b> числами.</p>
@@ -72,7 +72,7 @@
                             <label for="last_num">Введите второе число</label>
                         </div>
                         <div style="display: none;" class="input-field col s12 m12 center">
-                            <input id="action_result" type="number" readonly>
+                            <input id="action_result" style="font-weight: bold;" type="number" readonly>
                             <label for="action_result">Результат</label>
                             <a onclick="Calc.copy()" class="waves-effect waves-light btn"><i class="material-icons left">content_copy</i>Скопировать</a>
                         </div>
@@ -84,8 +84,8 @@
                     <!-- Об авторе + благодарности -->
                     <footer>
                         <div class="footer-copyright center">
-                            <div class="container">Сделано с <i class="pointer inline-icon fs-18 material-icons red-text no-select tooltipped" data-position="left" data-tooltip="XOXO">favorite</i> от <a class="link-hover" tabindex="-1" target="_blank" href="https://t.me/belomaxorka"><b class="gradient">corew</b></a>.</div>
-                            <div class="container">Благодарность <b class="gradient">Ивану Лебедеву</b> за бета-тестирование и feedback.</div>
+                            <div class="container">Сделано с <i class="pointer inline-icon fs-18 material-icons red-text no-select tooltipped" data-position="left" data-tooltip="XOXO &#128538;">favorite</i> от <a class="link-hover" tabindex="-1" target="_blank" href="https://t.me/belomaxorka"><b class="gradient">corew</b></a>.</div>
+                            <div class="container">Благодарность <b class="gradient">Ивану Лебедеву</b> за бета-тестирование и feedback'и.</div>
                             <div class="container">Дизайн написан с помощью <a class="link-hover" tabindex="-1" target="_blank" href="https://materializecss.github.io/materialize/"><b class="gradient">Materialize Fork</b></a>.</div>
                             <div class="container">Код написан с помощью <a class="link-hover" tabindex="-1" target="_blank" href="https://jquery.com/"><b class="gradient">jQuery</b></a>.</div>
                             <div class="container">Исходный код на <a class="link-hover" tabindex="-1" target="_blank" href="https://github.com/belomaxorka/SimpleCalc"><b class="gradient">GitHub</b></a>.</div>
