@@ -6,98 +6,115 @@
 <!-- HTML разметка -->
 <!DOCTYPE html>
 <html lang="">
-    <head>
-        <!-- Meta тэги -->
-        <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="title" content="SimpleCalc | corew">
-        <title>SimpleCalc | corew</title>
-        <meta name="description" content="SimpleCalc - Простой Web Калькулятор">
-        <meta name="keywords" content="calc, калькулятор, каль, simple, простой калькулятор, симпле, симпл калк, simple calc, calc simple, calculator simple, simple calculator, симпле калькулятор, калькулятор простой, калк простой, простой калк, симпле калк, simplecalc, calcsimple, SCalc, SC">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <meta name="application-name" content="SimpleCalc | corew">
-        <meta name="version" content="2.0">
-        <meta name="author" content="corew">
-        <meta name="designer" content="corew">
-        <meta name="copyright" content="corew">
-        <meta name="owner" content="corew">
-        <meta name="generator" content="self">
-        <!-- Логотип -->
-        <link rel="icon" type="image/x-icon" href="assets/calc/logo.png">
-        <!-- Подключаем jQuery + Migrate -->
-        <script type="text/javascript" src="assets/jquery/jquery-3.6.0.min.js"></script>
-        <script type="text/javascript" src="assets/jquery.migrate/jquery-migrate-3.4.0.min.js"></script>
-        <!-- Подключаем основные CSS -->
-        <link type="text/css" rel="stylesheet" href="assets/calc/styles.css">
-        <!-- Подключаем CSS Materialize + Fonts Materialize -->
-        <link type="text/css" rel="stylesheet" href="assets/materialize/font/font.css">
-        <link type="text/css" rel="stylesheet" href="assets/materialize/materialize.min.css">
-    </head>
-    <body>
-        <!-- Разметка калькулятора -->
-        <div class="container">
-            <!-- Основной контейнер -->
-            <div class="row">
-                <!-- Форма -->
-                <form class="col s12">
-                    <a tabindex="-1" href="#"><h5 class="center gradient">SimpleCalc</h5></a>
-                    <blockquote><i class="material-icons left no-select">arrow_downward</i>Ниже описана последовательность действий.
-                        <ul>
-                            <li>1. В поле "<b>Введите первое число</b>" введите первое желанное число.</li>
-                            <li>2. В поле "<b>Выберите операцию</b>" выберите операцию которую хотите выполнить с числом.</li>
-                            <li>3. В поле "<b>Введите второе число</b>" введите второе желанное число.</li>
-                            <li>4. Нажмите на кнопку "<b>Посчитать</b>".</li>
-                            <li>5. <b>Enjoy</b> &#129321;.</li>
-                        </ul>
-                        <hr>
-                        <p class="center">Калькулятор умеет работать с <b>отрицательными</b>, <b>положительными</b>, <b>целыми</b> и <b>не целыми</b> числами.</p>
-                    </blockquote>
-                    <div class="row no-select">
-                        <div class="input-field col s12 m5">
-                            <input placeholder="Например: 120" id="first_num" type="number" tabindex="1">
-                            <label for="first_num">Введите первое число</label>
-                        </div>
-                        <div class="input-field col s12 m2">
-                            <select id="actions_list" tabindex="2">
-                                <option value="default_action" default disabled selected hidden>Операция</option>
-                                <option value="plus_action">Сложение</option>
-                                <option value="minus_action">Вычитание</option>
-                                <option value="division_action">Деление</option>
-                                <option value="multiplication_action">Умножение</option>
-                            </select>
-                            <label for="actions_list">Выберите операцию</label>
-                        </div>
-                        <div class="input-field col s12 m5">
-                            <input placeholder="Например: 60" id="last_num" type="number" tabindex="3">
-                            <label for="last_num">Введите второе число</label>
-                        </div>
-                        <div style="display: none;" class="input-field col s12 m12 center">
-                            <input id="action_result" style="font-weight: bold;" type="number" readonly>
-                            <label for="action_result">Результат</label>
-                            <a onclick="Calc.copy()" class="waves-effect waves-light btn"><i class="material-icons left">content_copy</i>Скопировать</a>
-                        </div>
-                        <div class="input-field col s12 m12 center">
-                            <a onclick="Calc.calculate($('#first_num').val(), $('#actions_list option:selected').val(), $('#last_num').val())" class="waves-effect waves-light btn"><i class="material-icons left">check</i>Посчитать</a>
-                            <a onclick="Calc.clear()" class="waves-effect waves-light btn"><i class="material-icons left">close</i>Очистить</a>
-                        </div>
-                    </div>
-                    <!-- Об авторе + благодарности -->
-                    <footer>
-                        <div class="footer-copyright center">
-                            <div class="container">Сделано с <i class="pointer inline-icon fs-18 material-icons red-text tooltipped" data-position="left" data-tooltip="XOXO &#128538;">favorite</i> от <a class="link-hover" tabindex="-1" target="_blank" href="https://t.me/belomaxorka"><b class="gradient">corew</b></a>.</div>
-                            <div class="container">Благодарность <b class="gradient">Ивану Лебедеву</b> за бета-тестирование и feedback'и.</div>
-                            <div class="container">Дизайн написан с помощью <a class="link-hover" tabindex="-1" target="_blank" href="https://materializecss.github.io/materialize/"><b class="gradient">Materialize Fork</b></a>.</div>
-                            <div class="container">Код написан с помощью <a class="link-hover" tabindex="-1" target="_blank" href="https://jquery.com/"><b class="gradient">jQuery</b></a>.</div>
-                            <div class="container">Исходный код на <a class="link-hover" tabindex="-1" target="_blank" href="https://github.com/belomaxorka/SimpleCalc"><b class="gradient">GitHub</b></a>.</div>
-                        </div>
-                    </footer>
-                </form>
-            </div>
+<head>
+  <!-- Meta тэги -->
+  <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="title" content="SimpleCalc | corew">
+  <title>SimpleCalc | corew</title>
+  <meta name="description" content="SimpleCalc - Простой Web Калькулятор">
+  <meta name="keywords"
+        content="calc, калькулятор, каль, simple, простой калькулятор, симпле, симпл калк, simple calc, calc simple, calculator simple, simple calculator, симпле калькулятор, калькулятор простой, калк простой, простой калк, симпле калк, simplecalc, calcsimple, SCalc, SC">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="application-name" content="SimpleCalc | corew">
+  <meta name="version" content="2.0">
+  <meta name="author" content="corew">
+  <meta name="designer" content="corew">
+  <meta name="copyright" content="corew">
+  <meta name="owner" content="corew">
+  <meta name="generator" content="self">
+  <!-- Логотип -->
+  <link rel="icon" type="image/x-icon" href="assets/calc/logo.png">
+  <!-- Подключаем jQuery + Migrate -->
+  <script type="text/javascript" src="assets/jquery/jquery-3.6.1.min.js"></script>
+  <script type="text/javascript" src="assets/jquery.migrate/jquery-migrate-3.4.0.min.js"></script>
+  <!-- Подключаем основные CSS -->
+  <link type="text/css" rel="stylesheet" href="assets/calc/styles.css">
+  <!-- Подключаем CSS Materialize + Fonts Materialize -->
+  <link type="text/css" rel="stylesheet" href="assets/materialize/font/font.css">
+  <link type="text/css" rel="stylesheet" href="assets/materialize/materialize.min.css">
+</head>
+<body>
+<!-- Разметка калькулятора -->
+<div class="container">
+  <!-- Основной контейнер -->
+  <div class="row">
+    <!-- Форма -->
+    <form class="col s12">
+      <a tabindex="-1" href="#"><h5 class="center gradient">SimpleCalc</h5></a>
+      <blockquote><i class="material-icons left no-select">arrow_downward</i>Ниже описана последовательность действий.
+        <ul>
+          <li>1. В поле "<b>Введите первое число</b>" введите первое желанное число.</li>
+          <li>2. В поле "<b>Выберите операцию</b>" выберите операцию которую хотите выполнить с числом.</li>
+          <li>3. В поле "<b>Введите второе число</b>" введите второе желанное число.</li>
+          <li>4. Нажмите на кнопку "<b>Посчитать</b>".</li>
+          <li>5. <b>Enjoy</b> &#129321;.</li>
+        </ul>
+        <hr>
+        <p class="center">Калькулятор умеет работать с <b>отрицательными</b>, <b>положительными</b>, <b>целыми</b> и <b>не
+          целыми</b> числами.</p>
+      </blockquote>
+      <div class="row no-select">
+        <div class="input-field col s12 m5">
+          <input placeholder="Например: 120" id="first_num" type="number" tabindex="1">
+          <label for="first_num">Введите первое число</label>
         </div>
-        <!-- Подключаем JS Materialize + инициализируем -->
-        <script type="text/javascript" src="assets/materialize/materialize.min.js"></script>
-        <script>M.AutoInit();</script>
-        <!-- Подключаем JS Calc -->
-        <script type="text/javascript" src="assets/calc/script.js"></script>
-    </body>
+        <div class="input-field col s12 m2">
+          <select id="actions_list" tabindex="2">
+            <option value="default_action" default disabled selected hidden>Операция</option>
+            <option value="plus_action">Сложение</option>
+            <option value="minus_action">Вычитание</option>
+            <option value="division_action">Деление</option>
+            <option value="multiplication_action">Умножение</option>
+          </select>
+          <label for="actions_list">Выберите операцию</label>
+        </div>
+        <div class="input-field col s12 m5">
+          <input placeholder="Например: 60" id="last_num" type="number" tabindex="3">
+          <label for="last_num">Введите второе число</label>
+        </div>
+        <div style="display: none;" class="input-field col s12 m12 center">
+          <input id="action_result" style="font-weight: bold;" type="number" readonly>
+          <label for="action_result">Результат</label>
+          <a onclick="Calc.copy()" class="waves-effect waves-light btn"><i class="material-icons left">content_copy</i>Скопировать</a>
+        </div>
+        <div class="input-field col s12 m12 center">
+          <a
+            onclick="Calc.calculate($('#first_num').val(), $('#actions_list option:selected').val(), $('#last_num').val())"
+            class="waves-effect waves-light btn"><i class="material-icons left">check</i>Посчитать</a>
+          <a onclick="Calc.clear()" class="waves-effect waves-light btn"><i class="material-icons left">close</i>Очистить</a>
+        </div>
+      </div>
+      <!-- Об авторе + благодарности -->
+      <footer>
+        <div class="footer-copyright center">
+          <div class="container">Сделано с <i class="pointer inline-icon fs-18 material-icons red-text tooltipped"
+                                              data-position="left" data-tooltip="XOXO &#128538;">favorite</i> от <a
+            class="link-hover" tabindex="-1" target="_blank" href="https://t.me/belomaxorka"><b
+            class="gradient">corew</b></a>.
+          </div>
+          <div class="container">Благодарность <b class="gradient">Ивану Лебедеву</b> за бета-тестирование и feedback'и.
+          </div>
+          <div class="container">Дизайн написан с помощью <a class="link-hover" tabindex="-1" target="_blank"
+                                                             href="https://materializecss.github.io/materialize/"><b
+            class="gradient">Materialize Fork</b></a>.
+          </div>
+          <div class="container">Код написан с помощью <a class="link-hover" tabindex="-1" target="_blank"
+                                                          href="https://jquery.com/"><b class="gradient">jQuery</b></a>.
+          </div>
+          <div class="container">Исходный код на <a class="link-hover" tabindex="-1" target="_blank"
+                                                    href="https://github.com/belomaxorka/SimpleCalc"><b
+            class="gradient">GitHub</b></a>.
+          </div>
+        </div>
+      </footer>
+    </form>
+  </div>
+</div>
+<!-- Подключаем JS Materialize + инициализируем -->
+<script type="text/javascript" src="assets/materialize/materialize.min.js"></script>
+<script>M.AutoInit();</script>
+<!-- Подключаем JS Calc -->
+<script type="text/javascript" src="assets/calc/script.js"></script>
+</body>
 </html>
