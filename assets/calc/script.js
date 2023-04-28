@@ -1,7 +1,6 @@
 /**
  * script.js
  *
- * @author: corew
  * @package SimpleCalc
  */
 
