@@ -1,7 +1,25 @@
-# SimpleCalc
+<h1 align="center">SimpleCalc</h1>
+<p align="center">🧮 Calculator web-application.</p>
 
-SimpleCalc - Простой калькулятор.
+## 🔧 Dependencies
 
-Демо: https://belomaxorka.github.io/SimpleCalc/
+* [jQuery](https://github.com/jquery/jquery)
+* [Materialize](https://github.com/materializecss/materialize)
 
-[![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-direct.svg)](https://stand-with-ukraine.pp.ua)
+## 📺 Demo
+
+* [Click 😉](https://belomaxorka.github.io/SimpleCalc/)
+
+## 💚 Contributors
+
+<a href="https://github.com/belomaxorka/SimpleCalc/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=belomaxorka/SimpleCalc" alt=""/>
+</a>
+
+Made with [contrib.rocks](https://contrib.rocks).
+
+## 📖 License
+
+This repository is licensed under the [MIT License](LICENSE).
+
+Copyright © 2023, [belomaxorka](https://github.com/belomaxorka)
