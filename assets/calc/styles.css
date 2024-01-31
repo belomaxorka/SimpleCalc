@@ -21,11 +21,7 @@ a {
 	border: none;
 }
 
-a[href]:hover {
-	background: linear-gradient(135deg, #12BCB0 20%, #FABE0E 70%);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-}
+a[href]:hover {}
 
 /* Стилизация тэга - <hr> */
 hr {
