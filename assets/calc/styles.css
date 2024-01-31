@@ -21,9 +21,10 @@ a {
 	border: none;
 }
 
-a.link-hover:hover {
-	text-decoration: underline;
-	color: black;
+a[href]:hover {
+	background: linear-gradient(135deg, #12BCB0 20%, #FABE0E 70%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 }
 
 /* Стилизация тэга - <hr> */
