@@ -1,6 +1,11 @@
 <h1 align="center">SimpleCalc</h1>
 <p align="center">🧮 Calculator web-application.</p>
 
+## 🍩 TODO List
+
+- [ ] Dark mode
+- [ ] Multilingual support
+
 ## 🔧 Dependencies
 
 * [jQuery](https://github.com/jquery/jquery)
